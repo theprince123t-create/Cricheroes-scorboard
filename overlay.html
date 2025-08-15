@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Score Overlay</title>
+<style>
+  body { margin: 0; background: transparent; font-family: Arial, sans-serif; }
+  #scorebar {
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+<div id="scorebar">Loading score...</div>
+<script>
+function getMatchId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('match') || '18709413'; // default match ID
+}
+
+async function fetchScore() {
+    const matchId = getMatchId();
+    try {
+        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent('https://cricheroes.in/scorecard/' + matchId)}`);
+        const text = await res.text();
+        // This is simplified: In real hosting, you'll parse HTML for actual score
+        document.getElementById('scorebar').textContent = "Live Match ID: " + matchId + " (Page fetched)";
+    } catch (err) {
+        document.getElementById('scorebar').textContent = "Error fetching score";
+    }
+}
+
+fetchScore();
+setInterval(fetchScore, 10000);
+</script>
+</body>
+</html>
