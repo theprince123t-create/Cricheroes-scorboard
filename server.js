@@ -1,16 +1,15 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
+
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 3000;
 
-// Public folder serve करना
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-// Root URL पर overlay.html भेजना
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'overlay.html'));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ CricHeroes Overlay Server running on port ${PORT}`);
+    console.log(`✅ Server running on port ${PORT}`);
 });
