@@ -3,13 +3,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// Public folder serve
+// Public folder serve करना
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Root URL पर overlay.html भेजना
 app.get('/', (req, res) => {
-  res.send('✅ Cricheroes Overlay Server is Running');
+  res.sendFile(path.join(__dirname, 'public', 'overlay.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ CricHeroes Overlay Server running on port ${PORT}`);
 });
