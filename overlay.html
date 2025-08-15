@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>CricHeroes Overlay</title>
-  <style>
-    body {
-      margin: 0;
-      background: transparent;
-    }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 100vh;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>CricHeroes Overlay</title>
+    <style>
+        body {
+            margin: 0;
+            background: transparent;
+        }
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-  <!-- यहां match id बदलकर तुम्हारा CricHeroes का लाइव पट्टी वाला link डालो -->
-  <iframe src="https://cricheroes.in/live-video-scorecard-customize/18718898" allowfullscreen></iframe>
+    <iframe id="scoreboard" src="" allowfullscreen></iframe>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const matchId = urlParams.get("match") || "18718898"; // default match id
+        const overlayUrl = `https://cricheroes.in/live-video-scorecard-customize/${matchId}`;
+        document.getElementById("scoreboard").src = overlayUrl;
+    </script>
 </body>
 </html>
