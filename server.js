@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Live Score Overlay</title>
-<style>
-  body { margin: 0; background: transparent; }
-  iframe {
-    border: none;
-    width: 100%;
-    height: 100%;
-  }
-</style>
-</head>
-<body>
-<script>
-  // URL से match ID लेना
-  const params = new URLSearchParams(window.location.search);
-  const matchId = params.get("match") || "18709413"; // default ID
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = process.env.PORT || 10000;
 
-  // Iframe बनाना
-  document.write(`
-    <iframe src="https://cricheroes.in/live-video-scorecard-customize/${matchId}"></iframe>
-  `);
-</script>
-</body>
-</html>
+// Public folder serve
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.send('✅ Cricheroes Overlay Server is Running');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
